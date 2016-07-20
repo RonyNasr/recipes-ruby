@@ -23,8 +23,7 @@ end
 
 post('/recipes/new') do
   @recipe = Recipe.create(:name => params.fetch("name"), :instructions=> params.fetch("instructions"))
-  @recipes = Recipe.all()
-  erb(:recipes)
+  redirect ('/recipes/new')
 end
 
 get ('/recipes/:id/ingredients') do
@@ -69,11 +68,11 @@ delete '/ingredients/:id' do
 end
 
 
-get '/recipes/view' do
+get ('/recipes/view') do
   redirect ('/recipes')
 end
 
-get '/recipes/view/:id/ingredients' do
+get ('/recipes/view/:id/ingredients') do
     @recipe = Recipe.find(params.fetch("id").to_i())
 
     erb(:ingredients)
