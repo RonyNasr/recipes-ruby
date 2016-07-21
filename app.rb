@@ -4,6 +4,7 @@ require("sinatra/activerecord")
 also_reload('lib/**/*.rb')
 require('./lib/recipe')
 require('./lib/ingredient')
+require('./lib/tag')
 require('pg')
 
 get('/') do
@@ -28,6 +29,7 @@ end
 
 get ('/recipes/:id/ingredients') do
   @recipe = Recipe.find(params.fetch("id").to_i())
+  @tags = Tag.all()
 
   erb(:ingredient_form)
 end
@@ -76,4 +78,37 @@ get ('/recipes/view/:id/ingredients') do
     @recipe = Recipe.find(params.fetch("id").to_i())
 
     erb(:ingredients)
+end
+
+get('/tag/new') do
+  @tags = Tag.all()
+  erb(:add_tag)
+end
+
+post('/tag/new') do
+  name = params.fetch("name")
+  @tag = Tag.create({:name => name})
+  redirect('/tag/new')
+end
+
+get('/tag/:id/edit') do
+  @tag = Tag.find(params.fetch("id").to_i())
+  erb(:edit_tag)
+end
+
+delete('/tag/:id/edit') do
+  tag = Tag.find(params.fetch("id").to_i())
+  tag.destroy()
+  redirect('/tag/new')
+end
+
+patch ('/recipes/:id/tags') do
+  recipe = Recipe.find(params.fetch("id").to_i())
+  recipe.tags.delete_all()
+  if params.has_key?("tag_ids")
+    params.fetch("tag_ids").each() do |tag_id|
+      recipe.tags.push(Tag.find(tag_id.to_i()))
+    end
+  end
+  redirect("/recipes/#{params.fetch("id").to_i()}/ingredients")
 end

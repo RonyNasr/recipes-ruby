@@ -1,0 +1,19 @@
+<h1>Tags</h1>
+
+
+<h4>Current Tags</h4>
+<% if @tags.any?() %>
+  <% @tags.each() do |tag| %>
+  <h5><a href="/tag/<%= tag.id() %>/edit"><%= tag.name() %></a></h5>
+  <% end %>
+<% else %>
+  <h5>No Current Tags</h5>
+<% end %>
+
+
+<h4>Add a Tag</h4>
+<form action="/tag/new" method="post">
+  <label for="name">Tag name</label>
+  <input type="text" name="name">
+  <button type="submit">Add Tag!</button>
+</form>

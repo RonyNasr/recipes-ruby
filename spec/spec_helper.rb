@@ -4,6 +4,7 @@ require("pg")
 require("sinatra/activerecord")
 require('ingredient')
 require('recipe')
+require ("tag")
 require('pry')
 
 RSpec.configure do |config|
@@ -13,6 +14,9 @@ RSpec.configure do |config|
     end
     Recipe.all().each() do |this_recipes|
       this_recipes.destroy()
+    end
+    Tag.all().each() do |tag|
+      tag.destroy()
     end
   end
 end

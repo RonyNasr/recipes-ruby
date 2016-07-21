@@ -14,5 +14,5 @@
   <input type="hidden" name="recipe_id" value="<%= @recipe.id() %>">
 
   <button class="btn btn-default" type="submit">Delete Ingredient</button>
-  <a class="btn btn-default" href="/ingredients">Back</a>
+  <a class="btn btn-default" href="/recipes/<%= @recipe.id() %>/ingredients">Back</a>
 </form>

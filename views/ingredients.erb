@@ -1,9 +1,17 @@
 <h1><%= @recipe.name()%></h1>
 
+
 <% if @recipe.ingredients().any?() %>
+  <h2>Ingredients:</h2>
   <% @recipe.ingredients().each do |ingredient| %>
     <h5><%= ingredient.name() %></h5>
   <% end %>
 <% end %>
+
+<h2>Instructions:</h2>
+<p>
+  <%= @recipe.instructions() %>
+</p>
+
 
 <a class="btn btn-default" href="/recipes/view">Back</a>
