@@ -23,6 +23,18 @@ get('/recipes/new') do
   erb(:new_recipe)
 end
 
+get ('/ingredients/new') do
+  @ingredients = Ingredient.all()
+  erb(:add_ingredients)
+end
+
+get("/ingredients/:id/edit") do
+  @ingredient = Ingredient.find(params.fetch("id").to_i())
+
+  erb(:ingredients_edit)
+end
+
+
 post('/recipes/new') do
   @recipe = Recipe.create(:name => params.fetch("name"), :instructions=> params.fetch("instructions"))
   redirect ('/recipes/new')
@@ -31,6 +43,7 @@ end
 get ('/recipes/:id/ingredients') do
   @recipe = Recipe.find(params.fetch("id").to_i())
   @tags = Tag.all()
+  @ingredients = Ingredient.all()
 
   erb(:ingredient_form)
 end
@@ -49,25 +62,21 @@ delete ('/recipes/:id/ingredients') do
   redirect("/recipes")
 end
 
-get("/recipes/:recipe_id/ingredients/:id") do
-  @ingredient = Ingredient.find(params.fetch("id").to_i())
-  @recipe = Recipe.find(params.fetch("recipe_id").to_i)
-
-  erb(:ingredients_edit)
+post("/ingredients/new") do
+  Ingredient.create({:name => params.fetch("name")})
+  redirect("/ingredients/new")
 end
 
 patch ('/ingredients/:id') do
   ingredient = Ingredient.find(params.fetch("id").to_i())
   ingredient.update({:name => params.fetch("name") })
-  recipe_id = params.fetch("recipe_id").to_i()
-  redirect ("/recipes/#{recipe_id}/ingredients")
+  redirect ("/ingredients/#{params.fetch("id").to_i}/edit")
   end
 
-delete '/ingredients/:id' do
+delete ('/ingredients/:id') do
   ingredient = Ingredient.find(params.fetch("id").to_i())
   ingredient.destroy()
-  recipe_id = params.fetch("recipe_id").to_i()
-  redirect ("/recipes/#{recipe_id}/ingredients")
+  redirect ("/ingredients/new")
 end
 
 
@@ -112,4 +121,9 @@ patch ('/recipes/:id/tags') do
     end
   end
   redirect("/recipes/#{params.fetch("id").to_i()}/ingredients")
+end
+
+post('/recipes/view/:id/ingredients') do
+  rating = params.fetch('rating')
+
 end

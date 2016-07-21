@@ -4,14 +4,25 @@
   <div class="col-sm-6">
     <h3>Add Ingredients</h3>
     <% if @recipe.ingredients().any?() %>
-    <% @recipe.ingredients().each do |ingredient| %>
-    <h5><a href="/recipes/<%= @recipe.id() %>/ingredients/<%= ingredient.id() %>"><%= ingredient.name() %></a></h5>
+    <% @recipe.ingredients().each() do |ingredient| %>
+    <h5><%= ingredient.name() %></h5>
     <% end %>
     <% end %>
 
     <form action="/recipes/<%= @recipe.id() %>/ingredients" method="post">
       <label for="name"></label>
-      <input type="text" name="name" placeholder="Ingredient Name">
+      <select class="form-control " name="name">
+        <option value=""></option>
+        <% @ingredients.each() do |ingredient|%>
+          <% if !@recipe.ingredients.include?(ingredient) %>
+
+            <option value="<%= ingredient.name() %>"><%= ingredient.name() %></option>
+          <% end  %>
+        <% end  %>
+      </select>
+
+
+      <!-- <input type="text" name="name" placeholder="Ingredient Name"> -->
 
       <button class="btn btn-primary" type="submit">Add ingredient</button>
     </form>

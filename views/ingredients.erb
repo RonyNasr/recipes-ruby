@@ -1,7 +1,7 @@
 <h1><%= @recipe.name()%></h1>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-5">
     <% if @recipe.ingredients().any?() %>
     <h2>Ingredients:</h2>
     <% @recipe.ingredients().each do |ingredient| %>
@@ -10,7 +10,7 @@
     <% end %>
 
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-3">
     <% if @recipe.tags().any?() %>
     <h2>Tagged as:</h2>
     <% @recipe.tags().each do |tag| %>
@@ -18,6 +18,17 @@
     <% end %>
     <% end %>
 
+  </div>
+  <div class="col-sm-4">
+    <h2>Rated:</h2>
+    <form class="" action="/recipes/view/:id/ingredients" method="post">
+      <button type="" name="rating" value="1">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+      </button>
+      <button type="button" name="rating" value="0">
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+      </button>
+    </form>
   </div>
 </div>
 
