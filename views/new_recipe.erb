@@ -1,21 +1,24 @@
-<h1>Add a Recipe</h1>
+
+<h1>Edit a Current Recipe</h1>
 
 <% if @recipes.any?() %>
   <% @recipes.each() do |recipe| %>
-    <h5><a href="/recipes/<%= recipe.id() %>/ingredients"><%= recipe.name() %></a></h5>
+    <h3><a href="/recipes/<%= recipe.id() %>/ingredients"><%= recipe.name() %></a></h3>
   <% end %>
 <% else %>
   There are no recipes.
 <% end %>
 
-
+<h1>Add a Recipe</h1>
 
 <form  action="/recipes/new" method="post">
   <label for="name"> Name </label>
-  <input type="text" name="name">
-  <label for="instructions"> Instructions</label>
-  <input type="text" name="instructions"><br>
-
-  <button class="btn btn-default" type="submit" name="button">Add Recipe</button>
-  <a class="btn btn-default" href="/">Back</a>
+  <input class="form-control" type="text" name="name">
+  <label  for="instructions"> Instructions</label>
+  <textarea class="form-control" rows="4" cols="50" name="instructions"></textarea><br>
+  <button class="btn btn-primary" type="submit" name="button">Add Recipe</button>
 </form>
+<div class="bottom">
+  <a class="btn btn-primary" href="/">Back</a>
+  <a class="btn btn-default" href="/">Home</a>
+</div>

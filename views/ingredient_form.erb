@@ -1,34 +1,43 @@
 <h1><%= @recipe.name() %></h1>
 
-<h3>Add Ingredients</h3>
-<% if @recipe.ingredients().any?() %>
-  <% @recipe.ingredients().each do |ingredient| %>
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Add Ingredients</h3>
+    <% if @recipe.ingredients().any?() %>
+    <% @recipe.ingredients().each do |ingredient| %>
     <h5><a href="/recipes/<%= @recipe.id() %>/ingredients/<%= ingredient.id() %>"><%= ingredient.name() %></a></h5>
-  <% end %>
-<% end %>
+    <% end %>
+    <% end %>
 
-<form action="/recipes/<%= @recipe.id() %>/ingredients" method="post">
-  <label for="name"></label>
-  <input type="text" name="name">
+    <form action="/recipes/<%= @recipe.id() %>/ingredients" method="post">
+      <label for="name"></label>
+      <input type="text" name="name" placeholder="Ingredient Name">
 
-  <button class="btn btn-default" type="submit">Add ingredient</button>
-</form>
-
-<h3>Tag This Recipe</h3>
-<form class="" action="/recipes/<%= @recipe.id() %>/tags" method="post">
-  <input type="hidden" name="_method" value="patch">
-  <% if @tags.any?() %>
-    <% @tags.each do |tag| %><br>
+      <button class="btn btn-primary" type="submit">Add ingredient</button>
+    </form>
+  </div>
+  <div class="col-sm-6">
+    <h3>Tag This Recipe</h3>
+    <form class="" action="/recipes/<%= @recipe.id() %>/tags" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <% if @tags.any?() %>
+      <% @tags.each do |tag| %><br>
 
       <input type="checkbox" name="tag_ids[]" value="<%=tag.id%>" id="<%=tag.id%>" <%= @recipe.tags.include?(Tag.find(tag.id().to_i()))?"checked":"" %>> <%= tag.name() %> </input>
-    <% end %>
-  <% end %> <br>
-  <button class="btn btn-default" type="subnmit">Update Tags!</button>
-</form>
+      <% end %>
+      <% end %> <br>
+      <button class="btn btn-primary" type="submit">Update Tags!</button>
+    </form>
 
-<form action="/recipes/<%= @recipe.id() %>/ingredients" method="post">
-  <input type="hidden" name="_method" value="delete">
+  </div>
+</div>
 
-  <button class="btn btn-default" type="submit">Delete Recipe</button>
-  <a class="btn btn-default" href="/recipes/new">Back</a>
-</form>
+<div class="bottom">
+  <form action="/recipes/<%= @recipe.id() %>/ingredients" method="post">
+    <input type="hidden" name="_method" value="delete">
+
+    <button class="btn btn-danger" type="submit">Delete Recipe</button>
+    <a class="btn btn-primary" href="/recipes/new">Back</a>
+    <a class="btn btn-default" href="/">Home</a>
+  </form>
+</div>

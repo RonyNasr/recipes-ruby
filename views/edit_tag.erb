@@ -1,8 +1,10 @@
 <h1><%= @tag.name() %></h1>
 
-<form action="/tag/<%= @tag.id() %>/edit" method="post">
-  <input type="hidden" name="_method" value="delete">
+<div class="bottom">
+  <form action="/tag/<%= @tag.id() %>/edit" method="post">
+    <input  type="hidden" name="_method" value="delete">
 
-  <button class="btn btn-default" type="submit">Delete Tag</button>
-  <a class="btn btn-default" href="/tag/new">Back</a>
-</form>
+    <button class="btn btn-danger" type="submit">Delete Tag</button>
+    <a class="btn btn-primary" href="/tag/new">Back</a>
+  </form>
+</div>

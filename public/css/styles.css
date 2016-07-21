@@ -1,0 +1,19 @@
+.bottom{
+  border-top: solid lightgrey 1px;
+  margin-top: 20px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.instructions{
+  text-align: center;
+}
+
+.row {
+  min-height: 160px;
+}
+
+.jumbotron{
+  color: white;
+  background-color: #C78B3E;
+}

@@ -1,4 +1,13 @@
 <h1>Recipe Book</h1>
 <a href="/recipes/new">Add a Recipe</a>
-<a href="/recipes/view">View a Recipe</a>
 <a href="/tag/new">Add a Tag</a>
+
+<h1>Recipes</h1>
+
+<% if @recipes.any?() %>
+  <% @recipes.each() do |recipe| %>
+    <h5><a href="/recipes/view/<%= recipe.id() %>/ingredients"><%= recipe.name() %></a></h5>
+  <% end %>
+<% else %>
+  There are no recipes.
+<% end %>

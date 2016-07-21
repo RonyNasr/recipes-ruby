@@ -4,15 +4,18 @@
   <input type="hidden" name="_method" value="patch">
   <input type="hidden" name="recipe_id" value="<%= @recipe.id() %>">
   <label for="name"></label>
-  <input type="text" name="name">
+  <input type="text" name="name" required placeholder="Ingredient Name">
 
-  <button class="btn btn-default" type="submit">Edit ingredient</button>
+  <button class="btn btn-primary" type="submit">Edit Ingredient</button>
 </form>
 
-<form action="/ingredients/<%= @ingredient.id() %>" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <input type="hidden" name="recipe_id" value="<%= @recipe.id() %>">
+<div class="bottom">
+  <form action="/ingredients/<%= @ingredient.id() %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="hidden" name="recipe_id" value="<%= @recipe.id() %>">
 
-  <button class="btn btn-default" type="submit">Delete Ingredient</button>
-  <a class="btn btn-default" href="/recipes/<%= @recipe.id() %>/ingredients">Back</a>
-</form>
+    <button class="btn btn-danger" type="submit">Delete Ingredient</button>
+    <a class="btn btn-primary" href="/recipes/<%= @recipe.id() %>/ingredients">Back</a>
+  </form>
+
+</div>

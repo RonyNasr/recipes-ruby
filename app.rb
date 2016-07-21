@@ -8,6 +8,7 @@ require('./lib/tag')
 require('pg')
 
 get('/') do
+  @recipes = Recipe.all().order('name ASC')
   erb(:index)
 end
 

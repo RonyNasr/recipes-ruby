@@ -1,17 +1,34 @@
 <h1><%= @recipe.name()%></h1>
 
-
-<% if @recipe.ingredients().any?() %>
-  <h2>Ingredients:</h2>
-  <% @recipe.ingredients().each do |ingredient| %>
+<div class="row">
+  <div class="col-sm-6">
+    <% if @recipe.ingredients().any?() %>
+    <h2>Ingredients:</h2>
+    <% @recipe.ingredients().each do |ingredient| %>
     <h5><%= ingredient.name() %></h5>
-  <% end %>
-<% end %>
+    <% end %>
+    <% end %>
 
-<h2>Instructions:</h2>
-<p>
-  <%= @recipe.instructions() %>
-</p>
+  </div>
+  <div class="col-sm-6">
+    <% if @recipe.tags().any?() %>
+    <h2>Tagged as:</h2>
+    <% @recipe.tags().each do |tag| %>
+    <h5><%= tag.name() %></h5>
+    <% end %>
+    <% end %>
 
+  </div>
+</div>
 
-<a class="btn btn-default" href="/recipes/view">Back</a>
+<div class="instructions">
+  <h2>Instructions:</h2>
+  <p>
+    <%= @recipe.instructions() %>
+  </p>
+</div>
+
+<div class="bottom">
+  <a class="btn btn-primary" href="/recipes/view">Back</a>
+  <a class="btn btn-default" href="/">Home</a>
+</div>
